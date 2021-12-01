@@ -27,4 +27,4 @@ app.use(express.json());
         res.send('get_marcas!')
     })
 
-  //module.exports.handler = serverless(app);
+  module.exports.handler = serverless(app);
