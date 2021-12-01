@@ -1,3 +1,5 @@
+
+
 const serverless = require('serverless-http');
 const express = require('express');
 //const routerApi = require('./routes');
@@ -10,18 +12,19 @@ const app = express();
 app.use(express.json());
 
 
-app.get('/get_productos', function (req, res) {
-    res.send('get_productos!')
-  })
+
+    app.get('/productos', function (req, res) {
+        res.send('get_productos!')
+    })
 
 
-app.get('/producto', function (req, res) {
-    res.send('producto!')
-  })
+    app.get('/producto', function (req, res) {
+        res.send('producto!')
+    })
 
 
-app.get('/get_marcas', function (req, res) {
-    res.send('get_marcas!')
-  })
+    app.get('/marcas', function (req, res) {
+        res.send('get_marcas!')
+    })
 
-  module.exports.handler = serverless(app);
+  //module.exports.handler = serverless(app);
