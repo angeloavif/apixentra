@@ -18,16 +18,16 @@ service: apixentra-lambda
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-frameworkVersion: '2'
+#frameworkVersion: '1.53.0'
+plugins:
+  - serverless-offline
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: us-east-1
 
-plugins:
-  - serverless-offline
 
 functions:
   hello:
