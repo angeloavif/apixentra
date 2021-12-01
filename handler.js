@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.hello = async (event) => {
+module.exports.get_productos = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(
@@ -18,7 +18,7 @@ module.exports.hello = async (event) => {
 };
 
 
-module.exports.productos = async (event) => {
+module.exports.producto = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(
@@ -34,7 +34,7 @@ module.exports.productos = async (event) => {
   };
 };
 
-module.exports.marcas = async (event) => {
+module.exports.get_marcas = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(
