@@ -29,15 +29,15 @@ provider:
 
 functions:
   get_productos:
-    handler: handler.get_productos
+    handler: index.get_productos
     events:
       - http: GET get_productos
   producto:
-    handler: handler.producto
+    handler: index.producto
     events:
       - http: GET producto
   get_marcas:
-    handler: handler.get_marcas
+    handler: index.get_marcas
     events:
       - http: GET get_marcas
 
