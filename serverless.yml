@@ -39,7 +39,7 @@ functions:
     productos-filtros-get:
       handler: index.handler
       events:
-       - http: GET productos/filtros2
+       - http: POST productos/filtros2
     producto:
       handler: index.handler
       events:

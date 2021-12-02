@@ -41,17 +41,18 @@ router.get('/filtros',(req,res,next)=>{
 router.post('/filtros2',(req,res,next)=>{
 
   console.log(req.body)
+  /*console.log(req.body)
   try {
     const body = req.body || [];
     data = JSON.stringify(body);
   } catch (error) {
     next(boom.notFound("json no encontrado"));
-  }
+  }*/
 
   res.json({
     "status":false,
     "mensaje":"",
-    "data":data
+    "data":req.body
   });
 
 });
