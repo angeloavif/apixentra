@@ -3,6 +3,8 @@ const productosServices = require('./../services/productosServices');
 const router = express.Router();
 const service = new productosServices();
 const boom = require('@hapi/boom');
+const querystring = require('querystring');
+
 
 router.get('/',(req,res,next)=>{
 
@@ -36,8 +38,9 @@ router.get('/filtros',(req,res,next)=>{
 
 });
 
-router.get('/filtros2',(req,res,next)=>{
-  let data = [];
+router.post('/filtros2',(req,res,next)=>{
+
+  console.log(req.body)
   try {
     const body = req.body || [];
     data = JSON.stringify(body);
