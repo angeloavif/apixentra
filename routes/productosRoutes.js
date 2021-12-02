@@ -27,38 +27,22 @@ router.get('/',(req,res,next)=>{
 
 router.get('/filtros',(req,res,next)=>{
 
-  const {limit,offset} = req.query;
-  var dato = null;
-  if (limit && offset) {
-    //const productos = service.get_listadoSubcategorias();
-    var data = null;
-    service.get_listadoSubcategorias()
-    .then(productos => {
-       res.json({
-        "status":true,
-        "mensaje":"",
-        "data":productos
-      });
+  res.json({
+    "status":false,
+    "mensaje":"",
+    "data":"filtros"
+  });
 
-    })
-    .catch(err => {
-        return res.status(500).json({
-          "status":false,
-          "mensaje":err,
-          "data":null
-        });
-    });
+});
 
+router.get('/filtros2',(req,res,next)=>{
 
-
-  }else{
-    res.json({
-      "status":false,
-      "mensaje":"",
-      "data":null
-    });
-
-  }
+  const body = req.body;
+  res.json({
+    "status":false,
+    "mensaje":"",
+    "data":body
+  });
 
 });
 
