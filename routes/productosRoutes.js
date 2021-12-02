@@ -5,6 +5,28 @@ const service = new productosServices();
 
 router.get('/',(req,res,next)=>{
 
+    var data = null;
+    service.get_listadoSubcategorias()
+    .then(productos => {
+       res.json({
+        "status":true,
+        "mensaje":"",
+        "data":productos
+      });
+
+    })
+    .catch(err => {
+        return res.status(500).json({
+          "status":false,
+          "mensaje":err,
+          "data":null
+        });
+    });
+
+});
+
+router.get('/filtros',(req,res,next)=>{
+
   const {limit,offset} = req.query;
   var dato = null;
   if (limit && offset) {

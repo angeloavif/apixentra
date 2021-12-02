@@ -11,20 +11,6 @@ const app = express();
     //const port = config.port;
     app.use(express.json());
 
-    /*
-    app.get('/productos', function (req, res) {
-        res.send('get_productos!')
-    })
-
-
-    app.get('/producto', function (req, res) {
-        res.send('producto!')
-    })
-
-
-    app.get('/marcas', function (req, res) {
-        res.send('get_marcas!')
-    })*/
 
     routerApi(app);
     app.use(logErrors);
