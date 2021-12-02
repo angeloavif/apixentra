@@ -2,6 +2,7 @@ const express = require('express');
 const productosServices = require('./../services/productosServices');
 const router = express.Router();
 const service = new productosServices();
+const boom = require('@hapi/boom');
 
 router.get('/',(req,res,next)=>{
 
@@ -37,11 +38,17 @@ router.get('/filtros',(req,res,next)=>{
 
 router.get('/filtros2',(req,res,next)=>{
 
-  const body = req.body;
+  try {
+    const body = req.body || [];
+    let data = JSON.stringify(body);
+  } catch (error) {
+    next(boom.notFound("json no encontrado"));
+  }
+
   res.json({
     "status":false,
     "mensaje":"",
-    "data":body
+    "data":data
   });
 
 });
