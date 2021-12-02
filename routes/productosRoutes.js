@@ -12,7 +12,6 @@ router.get('/',(req,res,next)=>{
     var data = null;
     service.get_listadoSubcategorias()
     .then(productos => {
-
        res.json({
         "status":true,
         "mensaje":"",
@@ -52,21 +51,6 @@ router.get('/:id',(req,res)=>{
     "status":true,
     "mensaje":"",
     "data":productos
-  };
-
-
-  res.json(dato);
-});
-
-router.post('/',(req,res)=>{
-
-  const body = req.body;
-  var dato = {
-    "status":true,
-    "mensaje":"",
-    "data":[
-      body
-    ]
   };
 
 
