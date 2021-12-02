@@ -37,10 +37,10 @@ router.get('/filtros',(req,res,next)=>{
 });
 
 router.get('/filtros2',(req,res,next)=>{
-
+  let data = [];
   try {
     const body = req.body || [];
-    let data = JSON.stringify(body);
+    data = JSON.stringify(body);
   } catch (error) {
     next(boom.notFound("json no encontrado"));
   }
