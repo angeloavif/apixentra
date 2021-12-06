@@ -47,7 +47,7 @@ functions:
     producto:
       handler: index.handler
       events:
-        - http: GET producto
+       - http: GET producto
     diseno-config:
       handler: index.handler
       events:
@@ -55,4 +55,4 @@ functions:
     marcas:
       handler: index.handler
       events:
-        - http: GET marcas
+       - http: GET marcas
