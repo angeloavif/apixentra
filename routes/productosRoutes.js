@@ -28,19 +28,25 @@ router.get('/',(req,res,next)=>{
 
 });
 
-router.get('/filtros',(req,res,next)=>{
+router.post('/filtros',(req,res,next)=>{
 
-  res.json({
-    "status":false,
-    "mensaje":"",
-    "data":"filtros"
-  });
+  var data = req.body || null;
+    try {
+      res.json({
+        "status":false,
+        "mensaje":"",
+        "data":data
+      });
+    } catch (error) {
+        next(boom.notFound("Error al enviar la información",error))
+    }
+
+
 
 });
 
 router.post('/filtros2',(req,res,next)=>{
 
-  console.log(req.body)
   /*console.log(req.body)
   try {
     const body = req.body || [];

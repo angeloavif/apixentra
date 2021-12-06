@@ -21,6 +21,8 @@ class productosServicios {
       }
     }
 
+    genera_query(){}
+
     get_producto(id){
       return this.products.find(item =>item.id === id)
     }

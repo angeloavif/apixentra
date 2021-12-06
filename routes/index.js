@@ -1,6 +1,6 @@
 const express = require('express');
 const Products = require('./productosRoutes');
-
+const Diseno = require('./disenoRoutes');
 
 function routerApi(app){
 
@@ -8,7 +8,7 @@ function routerApi(app){
   //app.use('/v1',ruta_v1)
   //ruta_v1.use('/Products',Products)
   app.use('/productos',Products)
-
+  app.use('/diseno',Diseno)
 
 
 }
