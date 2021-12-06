@@ -45,7 +45,7 @@ class productosServicios {
 
     get_productos(){
       return new Promise((resolve, reject) => {
-
+        const mysql = cli_bd.conectar();
         const query_productos = `SELECT DISTINCT
         TABLE_TEMP.coin AS coin,
         TABLE_TEMP.calificacion AS calificacion,
@@ -225,7 +225,7 @@ class productosServicios {
 
         WHERE  precio_producto > 0  AND xnlip_clave ='GENERAL' `;
 
-        conexion.query(query_productos,
+        mysql.query(query_productos,
             (err, resultados) => {
                 if (err) reject(err);
                 else resolve(resultados);
