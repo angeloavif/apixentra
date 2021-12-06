@@ -51,7 +51,7 @@ functions:
     diseno-config:
       handler: index.handler
       events:
-       - http: POST diseno/configuraciones
+       - http: GET diseno/configuraciones
     marcas:
       handler: index.handler
       events:
