@@ -28,6 +28,11 @@ provider:
 
 
 functions:
+   auth:
+      handler: index.handler
+      events:
+       - http: GET auth
+
     productos:
       handler: index.handler
       events:
@@ -44,6 +49,12 @@ functions:
       handler: index.handler
       events:
         - http: GET producto
+
+    diseno-config:
+      handler: index.handler
+      events:
+       - http: POST diseno/configuraciones
+
     marcas:
       handler: index.handler
       events:

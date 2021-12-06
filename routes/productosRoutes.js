@@ -1,4 +1,5 @@
 const express = require('express');
+const {validaKey} = require('./../middleware/authHandler');
 const productosServices = require('./../services/productosServices');
 const router = express.Router();
 const service = new productosServices();
@@ -6,10 +7,10 @@ const boom = require('@hapi/boom');
 const querystring = require('querystring');
 
 
-router.get('/',(req,res,next)=>{
+router.get('/',validaKey,(req,res)=>{
 
     var data = null;
-    service.get_listadoSubcategorias()
+    service.get_productos()
     .then(productos => {
        res.json({
         "status":true,
