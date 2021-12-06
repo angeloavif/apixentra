@@ -28,7 +28,7 @@ provider:
 
 
 functions:
-   auth:
+    auth:
       handler: index.handler
       events:
        - http: GET auth
