@@ -1,6 +1,7 @@
 const faker = require('faker');
 const conexion = require('./../config/bd');
-
+const con_cliente = require('./../config/bd_cliente');
+const cli_bd = new con_cliente();
 class productosServicios {
 
     constructor(){
