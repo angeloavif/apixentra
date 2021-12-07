@@ -32,27 +32,34 @@ functions:
       handler: index.handler
       events:
        - http: GET auth
+         cors: true
     productos:
       handler: index.handler
       events:
        - http: GET productos
+         cors: true
     productos-filtros:
       handler: index.handler
       events:
        - http: POST productos/filtros
+         cors: true
     productos-filtros-get:
       handler: index.handler
       events:
        - http: POST productos/filtros2
+         cors: true
     producto:
       handler: index.handler
       events:
        - http: GET producto
+         cors: true
     diseno-config:
       handler: index.handler
       events:
        - http: GET diseno/configuraciones
+         cors: true
     marcas:
       handler: index.handler
       events:
        - http: GET marcas
+         cors: true

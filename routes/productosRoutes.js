@@ -14,7 +14,8 @@ router.get('/',validaKey,(req,res)=>{
     .then(productos => {
        res.json({
         "status":true,
-        "mensaje":"",
+        "message":"",
+        "statusCode":res.statusCode,
         "data":productos
       });
 
@@ -22,7 +23,8 @@ router.get('/',validaKey,(req,res)=>{
     .catch(err => {
         return res.status(500).json({
           "status":false,
-          "mensaje":err,
+          "message":err,
+          "statusCode":res.statusCode,
           "data":null
         });
     });
