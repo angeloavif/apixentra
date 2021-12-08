@@ -32,7 +32,11 @@ functions:
       handler: index.handler
       events:
        - http: GET auth
-         cors: true
+         cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: true
     productos:
       handler: index.handler
       events:
