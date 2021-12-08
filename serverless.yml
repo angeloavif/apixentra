@@ -35,6 +35,10 @@ functions:
          cors:
             origin: '*'
             cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers:
+              - Content-Type
+              - Authorization
+              - clv_emp
     productos:
       handler: index.handler
       events:
