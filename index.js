@@ -23,6 +23,19 @@ const app = express();
     app.use(express.json());
 
 
+    app.get('/',(req,res)=>{
+
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Credentials', false);
+
+      res.json({
+        "status":true,
+        "message":"",
+        "statusCode":res.statusCode
+      });
+  });
+
     app.get('/auth',(req,res)=>{
 
         res.setHeader('Content-Type', 'application/json');
