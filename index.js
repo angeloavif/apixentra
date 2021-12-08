@@ -33,6 +33,11 @@ const app = express();
     });
 
     app.get('/auth',(req,res)=>{
+
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
         const emp = req.headers["clv_emp"];
         service_general.get_datos_iniciales(emp)
         .then(service_general.get_modelo_negocio)
