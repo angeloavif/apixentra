@@ -12,6 +12,14 @@ const service_general = new generalServices();
 
 const app = express();
 
+    app.use(function (next) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      res.setHeader('Access-Control-Allow-Credentials', true);
+      next();
+    });
+
     //const port = config.port;
     app.use(express.json());
 
