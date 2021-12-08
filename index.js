@@ -15,7 +15,7 @@ const app = express();
 
   //enables cors
     app.use(cors({
-      allowedHeaders: ['Content-Type'],
+      allowedHeaders: ['Content-Type','Origin','X-Requested-With','Content-Type'],
       origin: '*',
       optionsSuccessStatus: 204,
       methods: 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
@@ -23,6 +23,7 @@ const app = express();
       "Content-Type":"appllication/json"
     }));
     app.use(express.json());
+
 
 
     app.get('/',(req,res)=>{
@@ -93,6 +94,13 @@ const app = express();
         "statusCode":res.statusCode
       });
     });*/
+
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,PATCH");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      next();
+    });
 
 
     routerApi(app);
