@@ -17,8 +17,10 @@ const app = express();
     app.use(cors({
       allowedHeaders: ['Content-Type'],
       origin: '*',
+      optionsSuccessStatus: 204,
       methods: 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
-      preflightContinue: false
+      preflightContinue: false,
+      "Content-Type":"appllication/json"
     }));
     app.use(express.json());
 
@@ -34,7 +36,7 @@ const app = express();
         "message":"",
         "statusCode":res.statusCode
       });
-  });
+    });
 
     app.get('/auth',(req,res)=>{
 
@@ -78,6 +80,19 @@ const app = express();
           });
         });
     });
+
+    /*app.options('/auth',(req,res)=>{
+
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Credentials', false);
+
+      res.json({
+        "status":true,
+        "message":"",
+        "statusCode":res.statusCode
+      });
+    });*/
 
 
     routerApi(app);
