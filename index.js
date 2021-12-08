@@ -15,15 +15,14 @@ const app = express();
 
   //enables cors
     app.use(cors({
-      allowedHeaders: ['Content-Type','Origin','X-Requested-With','Content-Type'],
+      allowedHeaders: ['Accept','Authorization','clv_emp','Content-Type','access-control-allow-origin','X-Requested-With'],
       origin: '*',
       optionsSuccessStatus: 204,
-      methods: 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
+      methods: 'GET,OPTIONS,PUT,PATCH,POST,HEAD,DELETE',
       preflightContinue: false,
       "Content-Type":"appllication/json"
     }));
     app.use(express.json());
-
 
 
     app.get('/',(req,res)=>{
