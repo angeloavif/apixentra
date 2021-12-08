@@ -2,6 +2,7 @@
 
 const serverless = require('serverless-http');
 const express = require('express');
+var cors = require('cors');
 const routerApi = require('./routes');
 //const {config} = require('./config/config');
 const {logErrors, errorHandler,boomErrorHandler, sqlErrorHamdler} = require('./middleware/errorHandler');
@@ -12,13 +13,15 @@ const service_general = new generalServices();
 
 const app = express();
 
-    app.use(function (next) {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-      res.setHeader('Access-Control-Allow-Credentials', true);
-      next();
-    });
+    app.use(cors({
+      origin: '*'
+    }));
+    app.use(cors({
+      exposedHeaders: ['Accept', 'application/json']
+    }));
+    app.use(cors({
+      credentials: true,
+    }));
 
     //const port = config.port;
     app.use(express.json());
