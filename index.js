@@ -17,6 +17,7 @@ const app = express();
       origin:'*',
       credentials:true,
       optionSuccessStatus:200,
+      methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
     }
 
     app.use(cors(corsOptions));
@@ -25,7 +26,7 @@ const app = express();
     //const port = config.port;
     app.use(express.json());
 
-    app.get('/auth',(req,res)=>{
+    app.get('/auth',cors(),(req,res)=>{
         const emp = req.headers["clv_emp"];
         service_general.get_datos_iniciales(emp)
         .then(service_general.get_modelo_negocio)
