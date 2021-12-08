@@ -13,15 +13,13 @@ const service_general = new generalServices();
 
 const app = express();
 
-    app.use(cors({
-      origin: '*'
-    }));
-    app.use(cors({
-      exposedHeaders: ['Accept', 'application/json']
-    }));
-    app.use(cors({
-      credentials: true,
-    }));
+    const corsOptions ={
+      origin:'*',
+      credentials:true,
+      optionSuccessStatus:200,
+    }
+
+    app.use(cors(corsOptions));
 
 
     //const port = config.port;
