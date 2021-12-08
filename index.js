@@ -13,20 +13,26 @@ const service_general = new generalServices();
 
 const app = express();
 
-    const corsOptions ={
-      origin:'*',
-      credentials:true,
-      optionSuccessStatus:200,
-      methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-    }
-
-    app.use(cors(corsOptions));
+  //enables cors
+    app.use(cors({
+      'allowedHeaders': ['sessionId', 'Content-Type'],
+      'exposedHeaders': ['sessionId'],
+      'origin': '*',
+      'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      'preflightContinue': false
+    }));
 
 
     //const port = config.port;
     app.use(express.json());
 
-    app.get('/auth',cors(),(req,res)=>{
+    app.all('/*', function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      next();
+    });
+
+    app.get('/auth',(req,res)=>{
         const emp = req.headers["clv_emp"];
         service_general.get_datos_iniciales(emp)
         .then(service_general.get_modelo_negocio)
