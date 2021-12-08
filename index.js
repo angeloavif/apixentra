@@ -18,7 +18,7 @@ const app = express();
       'allowedHeaders': ['sessionId', 'Content-Type'],
       'exposedHeaders': ['sessionId'],
       'origin': '*',
-      'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      'methods': 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
       'preflightContinue': false
     }));
 
@@ -35,7 +35,7 @@ const app = express();
     app.get('/auth',(req,res)=>{
 
         res.header("Access-Control-Allow-Origin", "*");
-        res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+        res.header('Access-Control-Allow-Methods', 'OPTIONS, DELETE, PATCH,PUT, GET, POST');
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         const emp = req.headers["clv_emp"];
