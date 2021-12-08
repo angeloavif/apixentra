@@ -15,18 +15,11 @@ const app = express();
 
   //enables cors
     app.use(cors({
-      'allowedHeaders': ['sessionId', 'Content-Type'],
-      'exposedHeaders': ['sessionId'],
-      'origin': '*',
-      'methods': 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
-      'preflightContinue': true
-    }));
-    app.options('*', cors({
-      'allowedHeaders': ['sessionId', 'Content-Type'],
-      'exposedHeaders': ['sessionId'],
-      'origin': '*',
-      'methods': 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
-      'preflightContinue': true
+      allowedHeaders: ['sessionId', 'Content-Type'],
+      exposedHeaders: ['sessionId'],
+      origin: '*',
+      methods: 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
+      preflightContinue: true
     }));
 
     //const port = config.port;
@@ -35,17 +28,13 @@ const app = express();
     app.all('/*', function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      res.header("methods", "GET,OPTIONS,PUT,PATCH,POST,DELETE");
       next();
     });
 
 
-    app.options('/pauth', cors())
+    app.options('/auth', cors())
     app.get('/auth',(req,res)=>{
-
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header('Access-Control-Allow-Methods', 'OPTIONS, DELETE, PATCH,PUT, GET, POST');
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
         const emp = req.headers["clv_emp"];
         service_general.get_datos_iniciales(emp)
         .then(service_general.get_modelo_negocio)
