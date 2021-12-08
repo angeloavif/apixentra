@@ -19,9 +19,15 @@ const app = express();
       'exposedHeaders': ['sessionId'],
       'origin': '*',
       'methods': 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
-      'preflightContinue': false
+      'preflightContinue': true
     }));
-
+    app.options('*', cors({
+      'allowedHeaders': ['sessionId', 'Content-Type'],
+      'exposedHeaders': ['sessionId'],
+      'origin': '*',
+      'methods': 'GET,OPTIONS,PUT,PATCH,POST,DELETE',
+      'preflightContinue': true
+    }));
 
     //const port = config.port;
     app.use(express.json());
@@ -31,9 +37,9 @@ const app = express();
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
       next();
     });
-    app.options('*', cors());
 
 
+    app.options('/pauth', cors())
     app.get('/auth',(req,res)=>{
 
         res.header("Access-Control-Allow-Origin", "*");
