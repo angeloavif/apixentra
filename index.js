@@ -31,6 +31,8 @@ const app = express();
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
       next();
     });
+    app.options('*', cors());
+
 
     app.get('/auth',(req,res)=>{
 
