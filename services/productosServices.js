@@ -408,7 +408,7 @@ class productosServicios {
         JOIN ECPR_subcategorias_grupos ON  ECPR_subcategorias_grupos.ecsca_id = ECPR_subcategorias.ecsca_id
         JOIN XNPR_imagenes ON  XNPR_imagenes.xnpri_id = XNPR_productos.xnpri_id
         JOIN XNPR_logistica_productos ON  XNPR_logistica_productos.xnpro_id = XNPR_productos.xnpro_id
-        WHERE 1 AND ECPR_productos.ecpro_estatus = 1 AND ECPR_marcas.ecmar_url = '`+marca+`' AND ECPR_subcategorias.ecsca_url = `+subcategoria+`
+        WHERE 1 AND ECPR_productos.ecpro_estatus = 1 AND ECPR_marcas.ecmar_url = '`+marca+`' AND ECPR_subcategorias.ecsca_url = '`+subcategoria+`'
         ) TABLE_TEMP
 
         LEFT JOIN ECPR_productos_areas_uso ON ECPR_productos_areas_uso.ecpro_id = TABLE_TEMP.ecpro_id
