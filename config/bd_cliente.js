@@ -3,12 +3,6 @@ var mysql = require('mysql');
 class cli_bd {
 
   constructor(){
-    global.businessModel = configuraciones.businessModel;
-    global.BM_showPrices = configuraciones.BM_showPrices;
-    global.BM_IVA = configuraciones.BM_IVA;
-    global.BM_ivaproducts = configuraciones.BM_ivaproducts;
-    global.tipo_utilidad = configuraciones.tipo_utilidad;
-    global.PRODUCTOS_STOCK = configuraciones.PRODUCTOS_STOCK;
 
     var where_interno = "";
     if (global.PRODUCTOS_STOCK == 'false') {
