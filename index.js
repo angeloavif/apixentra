@@ -4,7 +4,6 @@ const serverless = require('serverless-http');
 const express = require('express');
 var cors = require('cors');
 const routerApi = require('./routes');
-const { encrypt, decrypt } = require('./middleware/crpytoHandler');
 
 //const {config} = require('./config/config');
 const {logErrors, errorHandler,boomErrorHandler, sqlErrorHamdler} = require('./middleware/errorHandler');
@@ -55,9 +54,9 @@ const app = express();
           for (var i in config)
             element[config[i].coglo_codigo]  = config[i].coglo_valor;
 
-          //var key = Buffer.from(JSON.stringify(element)).toString('base64')
-          var json_key = JSON.stringify(element);
-          var key = encrypt(json_string);
+          var key = Buffer.from(JSON.stringify(element)).toString('base64')
+          //var json_key = JSON.stringify(element);
+          //var key = encrypt(json_string);
 
 
           if (element.empresa){

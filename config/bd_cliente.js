@@ -4,10 +4,10 @@ class cli_bd {
 
   constructor(){
 
-    var where_interno = "";
+    /*var where_interno = "";
     if (global.PRODUCTOS_STOCK == 'false') {
       where_interno = "AND XNPV_productos_proveedores.`xnprp_existencia` > 0";
-    }
+    }*/
 
     var iva = 1;
     var regla_utilidad = "";
