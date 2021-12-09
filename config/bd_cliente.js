@@ -217,7 +217,7 @@ class cli_bd {
     LEFT JOIN ECCL_productos_favoritos ON ECCL_productos_favoritos.ecpro_id = TABLE_TEMP.ecpro_id AND eccli_id = ''
     `;
 
-    this.QUERY_WHERE_EXTERNA = ` WHERE 1 precio_producto > 0   `;
+    this.QUERY_WHERE_EXTERNA = ` WHERE 1 AND precio_producto > 0   `;
 
     this.QUERY_COMPLETA = this.QUERY_BASE+this.QUERY_WHERE_INTERNO+this.QUERY_WHERE_EXTERNA;
   }
