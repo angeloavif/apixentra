@@ -134,8 +134,7 @@ class cli_bd {
     TABLE_TEMP.xnprl_fecha_inicio_descuento AS xnprl_fecha_inicio_descuento,
     TABLE_TEMP.xnprl_fecha_fin_descuento AS xnprl_fecha_fin_descuento,
     TABLE_TEMP.xnlop_envio AS xnlop_envio,
-    IF(xnlop_envio=0,1,0) envio_gratis,
-    TABLE_TEMP.xnico_clase AS xnico_clase
+    IF(xnlop_envio=0,1,0) envio_gratis
     FROM
     (SELECT
     'MXN' AS coin,
