@@ -11,16 +11,19 @@ router.get('/configuraciones',validaKey, (req,res)=>{
     .then(configuraciones => {
 
       var conf = {
-        links:["links_atencion_cliente","links_buscar_por_areas","links_destacados","links_acerca_de","links_contactos","links_nav_principal","links_redes_sociales"],
-        dateOfDelivery:{daysMax:5,daysMin:3},
-        businessModel:{
+        name:'API ECOMMERCE',
+        global:{
+          links:["links_atencion_cliente","links_buscar_por_areas","links_destacados","links_acerca_de","links_contactos","links_nav_principal","links_redes_sociales"],
+          dateOfDelivery:{daysMax:5,daysMin:3},
+          businessModel:{
                "model": "b2b",
                "showPrices": true,
                "IVA": 0.16,
                "IVAProducts": true
+          },
         },
         layout:{
-        header:{
+          header:{
                "background" : "#303641",
                "boxShadow" : "0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.12)",
                "avancedStyle" : null,
@@ -28,7 +31,7 @@ router.get('/configuraciones',validaKey, (req,res)=>{
                "iconsColor" : "rgb(123, 123, 123)",
                "logo" : "https://xentra.s3.amazonaws.com/xentra_demo/default/b_demo_logo_bg.png",
                "mobileLogo" : "https://xentra.s3.amazonaws.com/xentra_demo/default/b_demo_logo_bg.png"
-        }
+          }
        },
        components:{
                menu: {
