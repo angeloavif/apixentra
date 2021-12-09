@@ -12,6 +12,7 @@ router.get('/configuraciones',validaKey, (req,res)=>{
 
       var conf = {
         name:'API ECOMMERCE',
+        version:'v1',
         global:{
           links:["links_atencion_cliente","links_buscar_por_areas","links_destacados","links_acerca_de","links_contactos","links_nav_principal","links_redes_sociales"],
           dateOfDelivery:{daysMax:5,daysMin:3},
