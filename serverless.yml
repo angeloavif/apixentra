@@ -65,7 +65,15 @@ functions:
       handler: index.handler
       events:
        - http: GET diseno/configuraciones
-         cors: true
+         cors:
+            origin: '*'
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers: '*'
+       - http: OPTIONS diseno/configuraciones
+         cors:
+            origin: '*'
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers: '*'
     marcas:
       handler: index.handler
       events:
