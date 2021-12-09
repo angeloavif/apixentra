@@ -31,7 +31,7 @@ router.get('/',validaKey,(req,res)=>{
 
 });
 
-router.get('/marcas/:marca/:subcategoria',validaKey,(req,res)=>{
+router.post('/marcas/:marca/:subcategoria',validaKey,(req,res)=>{
 
   const marca = req.params.marca;
   const subcategoria = req.params.subcategoria;
