@@ -31,6 +31,33 @@ router.get('/',validaKey,(req,res)=>{
 
 });
 
+router.get('/marcas/:marca/:subcategoria',validaKey,(req,res)=>{
+
+  const marca = req.params.marca;
+  const subcategoria = req.params.subcategoria;
+
+  var data = null;
+  service.get_productos_marcas(marca,subcategoria)
+  .then(productos => {
+     res.json({
+      "status":true,
+      "message":"",
+      "statusCode":res.statusCode,
+      "data":productos
+    });
+
+  })
+  .catch(err => {
+      return res.status(500).json({
+        "status":false,
+        "message":err,
+        "statusCode":res.statusCode,
+        "data":null
+      });
+  });
+
+});
+
 router.post('/filtros',(req,res,next)=>{
 
   var data = req.body || null;

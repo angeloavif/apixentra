@@ -46,16 +46,14 @@ functions:
       events:
        - http: GET productos
          cors: true
-    productos-filtros:
+    productos-marca-subcategoria:
       handler: index.handler
       events:
-       - http: POST productos/filtros
-         cors: true
-    productos-filtros-get:
-      handler: index.handler
-      events:
-       - http: POST productos/filtros2
-         cors: true
+       - http: POST productos/marcas/{marca}/{subcategoria}
+         cors:
+            origin: '*'
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers: '*'
     producto:
       handler: index.handler
       events:
