@@ -38,14 +38,14 @@ router.post('/scat_detacada',validaKey,(req,res)=>{
   if (subcats!=null) {
     return res.status(200).json({
       "status":false,
-      "message":err,
+      "message":"",
       "statusCode":subcats,
       "data":null
     });
   } else {
     return res.status(404).json({
       "status":false,
-      "message":err,
+      "message":"",
       "statusCode":subcats,
       "data":null
     });
