@@ -241,6 +241,8 @@ class productosServicios {
 
 
         var query1 = " AND xnlip_clave ='GENERAL' ";
+        query1 += " AND ECPR_marcas.ecmar_url = '"+marca+"'";
+        query1 += " AND ECPR_subcategorias.ecsca_url ='"+subcategoria+"' ";
         var query_productos = cli_bd.query(query1,"");
 
         mysql.query(query_productos,
