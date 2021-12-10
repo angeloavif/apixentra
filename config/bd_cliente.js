@@ -210,7 +210,7 @@ class cli_bd {
     WHERE 1 AND ECPR_productos.ecpro_estatus = 1  `;
 
 
-    this.QUERY_WHERE_INTERNO = `) TABLE_TEMP
+    this.QUERY_FIN = `) TABLE_TEMP
     LEFT JOIN ECPR_productos_areas_uso ON ECPR_productos_areas_uso.ecpro_id = TABLE_TEMP.ecpro_id
     LEFT JOIN ECPR_productos_valores ON ECPR_productos_valores.ecpro_id = TABLE_TEMP.ecpro_id
     LEFT JOIN ECCL_productos_favoritos ON ECCL_productos_favoritos.ecpro_id = TABLE_TEMP.ecpro_id AND eccli_id = ''
@@ -218,7 +218,7 @@ class cli_bd {
 
     this.QUERY_WHERE_EXTERNA = ` WHERE 1 AND precio_producto > 0   `;
 
-    this.QUERY_COMPLETA = this.QUERY_BASE+this.QUERY_WHERE_INTERNO+this.QUERY_WHERE_EXTERNA;
+    this.QUERY_COMPLETA = this.QUERY_BASE+this.QUERY_FIN+this.QUERY_WHERE_EXTERNA;
   }
 
 
@@ -241,7 +241,7 @@ class cli_bd {
   query(WHERE_1="",WHERE_2=""){
 
 
-    var query_completa = this.QUERY_BASE+this.QUERY_WHERE_INTERNO+WHERE_1+this.QUERY_WHERE_EXTERNA+WHERE_2;
+    var query_completa = this.QUERY_BASE+WHERE_1+this.QUERY_FIN+this.QUERY_WHERE_EXTERNA+WHERE_2;
 
     return query_completa;
   }
