@@ -99,12 +99,10 @@ const app = express();
       });
     });*/
 
-
     routerApi(app);
     app.use(logErrors);
     app.use(sqlErrorHamdler);
     app.use(boomErrorHandler);
     app.use(errorHandler);
-
 
 module.exports.handler = serverless(app);
