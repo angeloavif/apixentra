@@ -4,10 +4,10 @@ class cli_bd {
 
   constructor(){
 
-    /*var where_interno = "";
+    var where_interno = "";
     if (global.PRODUCTOS_STOCK == 'false') {
-      where_interno = "AND XNPV_productos_proveedores.`xnprp_existencia` > 0";
-    }*/
+      where_interno = " AND XNPV_productos_proveedores.`xnprp_existencia` > 0 ";
+    }
 
     var iva = 1;
     var regla_utilidad = "";
@@ -207,7 +207,7 @@ class cli_bd {
     JOIN ECPR_subcategorias_grupos ON  ECPR_subcategorias_grupos.ecsca_id = ECPR_subcategorias.ecsca_id
     JOIN XNPR_imagenes ON  XNPR_imagenes.xnpri_id = XNPR_productos.xnpri_id
     JOIN XNPR_logistica_productos ON  XNPR_logistica_productos.xnpro_id = XNPR_productos.xnpro_id
-    WHERE 1 AND ECPR_productos.ecpro_estatus = 1  `;
+    WHERE 1 AND ECPR_productos.ecpro_estatus = 1  `+where_interno;
 
 
     this.QUERY_FIN = `) TABLE_TEMP

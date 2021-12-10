@@ -14,6 +14,7 @@ async function validaKey(req,res,next){
       global.BM_ivaproducts = configuraciones.BM_ivaproducts;
       global.tipo_utilidad = configuraciones.tipo_utilidad;
       global.empresa = configuraciones.empresa;
+      global.PRODUCTOS_STOCK = configuraciones.PRODUCTOS_STOCK;
       const json_var = await consultaBD(configuraciones.empresa).catch(e => {});
       await creaVariables(json_var);
       next();
