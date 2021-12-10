@@ -54,6 +54,24 @@ functions:
             origin: '*'
             cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
             headers: '*'
+       - http: OPTIONS productos/marcas/{marca}/{subcategoria}
+         cors:
+            origin: '*'
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers: '*'
+    productos-scat_detacada:
+      handler: index.handler
+      events:
+       - http: POST productos/scat_detacada
+         cors:
+            origin: '*'
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers: '*'
+       - http: OPTIONS productos/scat_detacada
+         cors:
+            origin: '*'
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+            headers: '*'
     producto:
       handler: index.handler
       events:

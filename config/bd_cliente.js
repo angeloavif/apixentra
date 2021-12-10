@@ -68,6 +68,65 @@ class cli_bd {
 
     }
 
+    var iva = 1;
+    var regla_utilidad = "";
+    (global.BM_ivaproducts=='true') ? iva = 1+parseFloat(global.BM_IVA) : iva = 1;
+
+    if (global.tipo_utilidad == "UxV") {
+
+      regla_utilidad = `
+            CONCAT(
+            '/',
+            ECPR_subcategorias.ecsca_url,
+            '/',
+            ECPR_productos.ecpro_url
+            ) AS url,
+            (
+            CASE
+                WHEN (XNPR_productos_listas.xntrl_id = 1) THEN ( (  (XNPV_productos_proveedores.xnprp_costo)*`+iva+`)/(1-(XNPR_productos_listas.xnprl_valor/100)) )
+                WHEN (XNPR_productos_listas.xntrl_id = 2) THEN (XNPR_productos_listas.xnprl_valor + XNPV_productos_proveedores.xnprp_costo)*`+iva+`
+                ELSE XNPR_productos_listas.xnprl_valor
+            END
+            ) AS precio_producto_real,
+            REPLACE(FORMAT((
+                CASE
+                    WHEN (XNPR_productos_listas.xntrl_id = 1) THEN ( ( (XNPV_productos_proveedores.xnprp_costo)*`+iva+`)/(1-(XNPR_productos_listas.xnprl_valor/100) ) )
+                    WHEN (XNPR_productos_listas.xntrl_id = 2) THEN (XNPR_productos_listas.xnprl_valor + XNPV_productos_proveedores.xnprp_costo)*`+iva+`
+                    ELSE XNPR_productos_listas.xnprl_valor
+                END),2
+            ),',','')
+            AS precio_producto,
+      `;
+
+    }else{
+
+      regla_utilidad = `
+      CONCAT(
+          '/',
+          ECPR_subcategorias.ecsca_url,
+          '/',
+          ECPR_productos.ecpro_url
+          ) AS url,
+          (
+          CASE
+              WHEN (XNPR_productos_listas.xntrl_id = 1) THEN ( ((XNPR_productos_listas.xnprl_valor * XNPV_productos_proveedores.xnprp_costo)/100)+XNPV_productos_proveedores.xnprp_costo)*`+iva+`
+              WHEN (XNPR_productos_listas.xntrl_id = 2) THEN (XNPR_productos_listas.xnprl_valor + XNPV_productos_proveedores.xnprp_costo) * `+iva+`
+              ELSE XNPR_productos_listas.xnprl_valor
+          END
+          ) AS precio_producto_real,
+
+          REPLACE(FORMAT((
+              CASE
+                  WHEN (XNPR_productos_listas.xntrl_id = 1) THEN(((XNPR_productos_listas.xnprl_valor * XNPV_productos_proveedores.xnprp_costo) / 100) + XNPV_productos_proveedores.xnprp_costo) *`+iva+`
+                  WHEN (XNPR_productos_listas.xntrl_id = 2) THEN (XNPR_productos_listas.xnprl_valor + XNPV_productos_proveedores.xnprp_costo) *`+iva+`
+                  ELSE XNPR_productos_listas.xnprl_valor
+              END),2
+           ),',','')
+           AS precio_producto,
+      `;
+
+    }
+
     this.QUERY_BASE = `SELECT DISTINCT
     TABLE_TEMP.coin AS coin,
     TABLE_TEMP.calificacion AS calificacion,
@@ -78,6 +137,8 @@ class cli_bd {
     TABLE_TEMP.ecpro_nombre AS ecpro_nombre,
     TABLE_TEMP.xnpro_sku AS xnpro_sku,
     TABLE_TEMP.ecmar_id AS ecmar_id,
+    TABLE_TEMP.url_marcascat AS url_marcascat,
+    TABLE_TEMP.ecmar_url,
     TABLE_TEMP.ecmar_jpg_thumbnail AS ecmar_jpg_thumbnail,
     TABLE_TEMP.ecmar_webp_thumbnail AS ecmar_webp_thumbnail,
     TABLE_TEMP.ecmar_jpg_avatar AS ecmar_jpg_avatar,
@@ -150,6 +211,7 @@ class cli_bd {
     ECPR_productos.ecpro_nombre AS ecpro_nombre,
     XNPR_productos.xnpro_sku AS xnpro_sku,
     ECPR_marcas.ecmar_id AS ecmar_id,
+    ECPR_marcas.ecmar_url,
     ECPR_marcas.ecmar_jpg_thumbnail AS ecmar_jpg_thumbnail,
     ECPR_marcas.ecmar_webp_thumbnail AS ecmar_webp_thumbnail,
     ECPR_marcas.ecmar_jpg_avatar AS ecmar_jpg_avatar,
@@ -193,7 +255,7 @@ class cli_bd {
     ECPR_marcas.ecmar_url,
     '/',
     ECPR_subcategorias.ecsca_url
-    ) AS ecmar_url
+    ) AS url_marcascat
     FROM
     ECPR_productos
     JOIN ECPR_marcas ON  ECPR_marcas.ecmar_id = ECPR_productos.ecmar_id
@@ -207,7 +269,7 @@ class cli_bd {
     JOIN ECPR_subcategorias_grupos ON  ECPR_subcategorias_grupos.ecsca_id = ECPR_subcategorias.ecsca_id
     JOIN XNPR_imagenes ON  XNPR_imagenes.xnpri_id = XNPR_productos.xnpri_id
     JOIN XNPR_logistica_productos ON  XNPR_logistica_productos.xnpro_id = XNPR_productos.xnpro_id
-    WHERE 1 AND ECPR_productos.ecpro_estatus = 1  `+where_interno;
+    WHERE 1 AND ECPR_productos.ecpro_estatus = 1  `+where_interno;;
 
 
     this.QUERY_FIN = `) TABLE_TEMP

@@ -31,6 +31,29 @@ router.get('/',validaKey,(req,res)=>{
 
 });
 
+router.post('/scat_detacada',validaKey,(req,res)=>{
+
+  var subcats = req.body || null;
+
+  if (subcats!=null) {
+    return res.status(200).json({
+      "status":false,
+      "message":err,
+      "statusCode":subcats,
+      "data":null
+    });
+  } else {
+    return res.status(404).json({
+      "status":false,
+      "message":err,
+      "statusCode":subcats,
+      "data":null
+    });
+  }
+
+
+});
+
 router.post('/marcas/:marca/:subcategoria',validaKey,(req,res)=>{
 
   const marca = req.params.marca;
@@ -39,11 +62,52 @@ router.post('/marcas/:marca/:subcategoria',validaKey,(req,res)=>{
   var data = null;
   service.get_productos_marcas(marca,subcategoria)
   .then(productos => {
+      var element = [];
+      for (var i in productos){
+        var data = {
+          'id':productos[i].ecpro_id,
+          'name':productos[i].ecpro_nombre,
+          'description':productos[i].ecpro_descripcion_html,
+          'sku':productos[i].xnpro_sku,
+          'url':productos[i].product_url,
+          'img': [
+            {
+              "img_sm": productos[i].ecmar_jpg_thumbnail,
+              "img_bg": productos[i].xnpri_jpg_grande,
+            },
+          ],
+          'brand': {
+              "name":  productos[i].ecmar_nombre,
+              "url":  productos[i].ecmar_url,
+              "img": productos[i].xnpri_jpg_grande,
+              "stamps": null
+            },
+          'mainFeatures':null,
+          'favorite':productos[i].ecpro_id,
+          'stock':productos[i].xnprp_existencia,
+          'price': (productos[i].descuento_valido==1) ? (productos[i].precio_producto-productos[i].precio_descuento) : productos[i].precio_producto,
+          'priceOld':productos[i].precio_producto,
+          'tooltip':null,
+          'labels': null,
+          'freeShipping':productos[i].envio_gratis,
+          'promotionTime':productos[i].xnprl_fecha_fin_descuento,
+          'promotionSaving':productos[i].descuento,
+          'promotionType':productos[i].tipo_descuento,
+          'specifications':null,
+          'msi':null,
+          'script':null,
+          'styleCss':null,
+          'warehouses':null
+        }
+
+        element.push(data);
+      }
+
      res.json({
       "status":true,
       "message":"",
       "statusCode":res.statusCode,
-      "data":productos
+      "data":element
     });
 
   })
