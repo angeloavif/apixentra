@@ -6,7 +6,7 @@ class productosServicios {
 
     constructor(){
         this.products = [];
-        this.generar();
+        //this.generar();
     }
 
     generar(){
@@ -251,6 +251,101 @@ class productosServicios {
                 else resolve(resultados);
             });
       });
+      //conexion.query('SELECT ecpro_id, ecpro_nombre, `ecpro_estatus` FROM ECPR_productos');
+    }
+
+    async fnc_valida_subcategorias(scat){
+      return new Promise((resolve, reject) => {
+        const mysql = cli_bd.conectar();
+        mysql.query(`SELECT
+        ECPR_subcategorias.ecsca_id,
+        ECPR_subcategorias.ecsca_url,
+        ECPR_subcategorias.ecsca_clave,
+        ECPR_subcategorias.ecsca_nombre,
+        ECPR_subcategorias.ecsca_descripcion
+        FROM ECPR_subcategorias
+        WHERE ECPR_subcategorias.ecsca_estatus = 1  and ECPR_subcategorias.ecsca_disponible = 1 AND ECPR_subcategorias.ecsca_clave ='`+scat+`' `,
+            (err, subcategorias) => {
+                if (err) reject(err);
+                else resolve(subcategorias);
+            });
+      });
+      //conexion.query('SELECT ecpro_id, ecpro_nombre, `ecpro_estatus` FROM ECPR_productos');
+    }
+
+    async get_productos_subcategoria(scat){
+      return new Promise((resolve, reject) => {
+
+        const mysql = cli_bd.conectar();
+        var query1 = " AND xnlip_clave ='GENERAL' ";
+        query1 += " AND ECPR_subcategorias.ecsca_id ='"+scat[0].ecsca_id+"' ";
+        var query_productos = cli_bd.query(query1,"");
+
+        mysql.query(query_productos,
+            (err, resultados) => {
+                if (err) reject(err);
+                else resolve(resultados);
+            });
+      });
+    }
+
+    async get_productos_subcategorias(array_cat){
+
+      var array_productos = [];
+      for (var i in array_cat){
+        var scat  = array_cat[i];
+        const categoria = await this.fnc_valida_subcategorias(scat);
+        if (categoria.length==0) {continue;}
+        const productos = await this.get_productos_subcategoria(categoria);
+        var element = [];
+        for (var x in productos){
+          var data = {
+            'id':productos[x].ecpro_id,
+            'name':productos[x].ecpro_nombre,
+            'description':productos[x].ecpro_descripcion_html,
+            'sku':productos[x].xnpro_sku,
+            'url':productos[x].product_url,
+            'img': [
+              {
+                "img_sm": productos[x].ecmar_jpg_thumbnail,
+                "img_bg": productos[x].xnpri_jpg_grande,
+              },
+            ],
+            'brand': {
+                "name":  productos[x].ecmar_nombre,
+                "url":  productos[x].ecmar_url,
+                "img": productos[x].xnpri_jpg_grande,
+                "stamps": null
+              },
+            'mainFeatures':null,
+            'favorite':productos[x].ecpro_id,
+            'stock':productos[x].xnprp_existencia,
+            'price': (productos[x].descuento_valido==1) ? (productos[x].precio_producto-productos[x].precio_descuento) : productos[x].precio_producto,
+            'priceOld':productos[x].precio_producto,
+            'tooltip':null,
+            'labels': null,
+            'freeShipping':productos[x].envio_gratis,
+            'promotionTime':productos[x].xnprl_fecha_fin_descuento,
+            'promotionSaving':productos[x].descuento,
+            'promotionType':productos[x].tipo_descuento,
+            'specifications':null,
+            'msi':null,
+            'script':null,
+            'styleCss':null,
+            'warehouses':null
+          }
+          element.push(data);
+        }
+        array_productos.push({
+          "title":categoria[0].ecsca_nombre,
+          "description":categoria[0].ecsca_descripcion,
+          "url":categoria[0].ecsca_url,
+          "urlText":'',
+          "products":element
+        })
+      }
+
+      return array_productos;
       //conexion.query('SELECT ecpro_id, ecpro_nombre, `ecpro_estatus` FROM ECPR_productos');
     }
 

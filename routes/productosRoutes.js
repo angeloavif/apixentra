@@ -35,21 +35,23 @@ router.post('/scat_detacada',validaKey,(req,res)=>{
 
   var subcats = req.body || null;
 
-  if (subcats!=null) {
-    return res.status(200).json({
-      "status":false,
-      "message":"",
-      "statusCode":subcats,
-      "data":null
-    });
-  } else {
-    return res.status(404).json({
-      "status":false,
-      "message":"",
-      "statusCode":subcats,
-      "data":null
-    });
-  }
+
+  service.get_productos_subcategorias(subcats)
+  .then(productos => {
+
+      var  dato = {
+        "status":true,
+        "mensaje":"",
+        "data":productos
+      };
+    res.json(dato);
+   })
+  .catch(err => {
+    console.log(err)
+  });
+
+
+
 
 
 });
