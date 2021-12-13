@@ -124,6 +124,44 @@ router.post('/marcas/:marca/:subcategoria',validaKey,(req,res)=>{
 
 });
 
+router.get('/relacionados',validaKey,(req,res)=>{
+
+  let cliente = req.query.cliente || 0;
+  let prod_id = req.query.prod_id || 0;
+
+
+  if (prod_id == 0) {
+    res.json({
+      "status":false,
+      "statusCode":404,
+      "mensaje":"",
+      "data":[]
+    });
+  }
+
+  service.get_productos_relacionados(cliente,prod_id)
+    .then(productos => {
+      var  dato = {
+        "status":true,
+        "mensaje":"",
+        "data":productos
+      };
+    res.json(dato);
+   })
+  .catch(err => {
+
+    res.status(500).json({
+      "status":false,
+      "mensaje":err,
+      "statusCode":res.statusCode,
+      "data":null
+    });
+
+  });
+
+});
+
+
 router.post('/filtros',(req,res,next)=>{
 
   var data = req.body || null;

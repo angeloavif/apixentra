@@ -349,6 +349,16 @@ class productosServicios {
       //conexion.query('SELECT ecpro_id, ecpro_nombre, `ecpro_estatus` FROM ECPR_productos');
     }
 
+    get_productos_relacionados(id_producto,id_cliente){
+      return new Promise((resolve, reject) => {
+        const mysql = cli_bd.conectar();
+        mysql.query("call proc_get_productos_relacionados(?,?)",[id_producto, id_cliente],(err, resultados) => {
+                if (err) reject(err);
+                else resolve(resultados);
+            });
+      });
+    }
+
 }
 
 module.exports = productosServicios;
