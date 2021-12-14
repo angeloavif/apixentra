@@ -354,7 +354,7 @@ class productosServicios {
         const mysql = cli_bd.conectar();
         mysql.query("call proc_get_productos_relacionados(?,?)",[id_producto, id_cliente],(err, resultados) => {
                 if (err) reject(err);
-                else resolve(resultados);
+                else resolve(resultados[0]);
             });
       });
     }
