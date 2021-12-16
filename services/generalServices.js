@@ -1,5 +1,9 @@
 const conexion = require('./../config/bd');
 const con_cliente = require('./../config/bd_cliente');
+
+var request = require('request');
+
+
 const cli_bd = new con_cliente();
 
 class generalServices {
@@ -32,6 +36,16 @@ class generalServices {
 
       return data;
     }
+
+
+    get_menu(){
+      return new Promise((resolve, reject) => {
+        request('https://tecnoip.com/servicios/services/ws_menu.php', (error, response, data) => {
+            if(error) reject(error)
+            else resolve(data)
+        })
+    })
+
 
 
 }

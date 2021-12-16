@@ -86,6 +86,26 @@ const app = express();
         });
     });
 
+
+    app.get('/marcas',(req,res)=>{
+
+      service_general.get_menu
+      .then(data => {
+
+          var  dato = {
+            "status":true,
+            "mensaje":"",
+            "data":data
+          };
+        res.json(dato);
+       })
+      .catch(err => {
+        console.log(err)
+      });
+
+
+    });
+
     /*app.options('/auth',(req,res)=>{
 
       res.setHeader('Content-Type', 'application/json');
