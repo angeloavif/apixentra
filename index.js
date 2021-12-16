@@ -91,7 +91,6 @@ const app = express();
 
       service_general.get_menu
       .then(data => {
-
           var  dato = {
             "status":true,
             "mensaje":"",

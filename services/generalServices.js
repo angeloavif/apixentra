@@ -42,7 +42,7 @@ class generalServices {
       return new Promise((resolve, reject) => {
         request('https://tecnoip.com/servicios/services/ws_menu.php', (error, response, data) => {
             if(error) reject(error)
-            else resolve(data)
+            else resolve(JSON.parse(data))
         })
     })
 
