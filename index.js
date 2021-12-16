@@ -89,7 +89,7 @@ const app = express();
 
     app.get('/marcas',(req,res)=>{
 
-      service_general.get_menu
+      service_general.get_menu()
       .then(data => {
           var  dato = {
             "status":true,
