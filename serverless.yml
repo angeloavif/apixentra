@@ -108,3 +108,8 @@ functions:
       events:
        - http: GET marcas
          cors: true
+         accessConfigurations:
+            vpcSubnet:
+              - subnet-03dbd1c1959f6e946
+              - subnet-0acd93629e01b1f83
+            vpcSecurityGroup: sg-0b69b5acd6759b172
